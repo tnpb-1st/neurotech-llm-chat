@@ -1,0 +1,14 @@
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+plotly
+psycopg2-binary
+python-dotenv
+flask
+streamlit
+langchain
+langchain-openai
+duckdb
+black
