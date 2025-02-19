@@ -3,7 +3,6 @@ import pandas as pd
 from src.llms.agents.query_validator import QueryValidator
 from src.llms.agents.sql_executor import SQLExecutor
 from src.llms.agents.insight_generator import InsightsGenerator
-from langchain_openai import ChatOpenAI
 from config.constants import TABLE_INFO
 
 

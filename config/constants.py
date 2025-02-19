@@ -29,7 +29,11 @@ TABLE_INFO = [
         "Tipo do Dado": "CHAR(2) or NULL",
         "Exemplo": "PE, PB, SP, RJ, ..., NULL",
     },
-    {"Nome": "CLASSE", "Tipo do Dado": "CHAR(1) or NULL", "Exemplo": "A, D, E, ..., NULL"},
+    {
+        "Nome": "CLASSE",
+        "Tipo do Dado": "CHAR(1) or NULL",
+        "Exemplo": "A, D, E, ..., NULL",
+    },
 ]
 
 COMPLEX_ADVERSARIAL_QUERY = """

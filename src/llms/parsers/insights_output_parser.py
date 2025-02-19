@@ -21,7 +21,9 @@ class InsightsOutputParser(BaseOutputParser):
             insights = match.group(1).strip(" \n")
             return insights
         else:
-            raise OutputParserException("Não foi possível extrair os insights da resposta.")
+            raise OutputParserException(
+                "Não foi possível extrair os insights da resposta."
+            )
 
     @property
     def _type(self) -> str:
