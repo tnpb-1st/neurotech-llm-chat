@@ -21,15 +21,15 @@ TABLE_INFO = [
     {
         "Nome": "IDADE",
         "Tipo do Dado": "FLOAT or NULL",
-        "Exemplo": "34.137, 40.447, NULL",
+        "Exemplo": "34.137, 40.447, ..., NULL",
     },
     {"Nome": "VAR4", "Tipo do Dado": "CHAR(1) or NULL", "Exemplo": "S, NULL"},
     {
         "Nome": "ESTADO",
         "Tipo do Dado": "CHAR(2) or NULL",
-        "Exemplo": "PE, PB, SP, RJ, NULL",
+        "Exemplo": "PE, PB, SP, RJ, ..., NULL",
     },
-    {"Nome": "CLASSE", "Tipo do Dado": "CHAR(1) or NULL", "Exemplo": "A, D, E, NULL"},
+    {"Nome": "CLASSE", "Tipo do Dado": "CHAR(1) or NULL", "Exemplo": "A, D, E, ..., NULL"},
 ]
 
 COMPLEX_ADVERSARIAL_QUERY = """
