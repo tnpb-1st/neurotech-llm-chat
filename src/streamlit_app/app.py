@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
+from src.llms.agents.query_validator import QueryValidator
+
 # Certifique-se de que este caminho esteja correto
-from src.config.constants import (
-    OPENAI_MODEL,
-    OPENAI_API_KEY,
-    TABLE_INFO
+from config.constants import (
+    TABLE_INFO,
 )  # Certifique-se de que este caminho esteja correto
 
 from langchain_openai import ChatOpenAI
@@ -19,12 +19,6 @@ col1 = st.columns([0.2])[0]
 if st.button("Novo Chat", type="primary"):
     st.rerun()
 
-# Inicializa o cliente do LangChain com o ChatOpenAI
-chat = ChatOpenAI(
-    model=OPENAI_MODEL,
-    api_key=OPENAI_API_KEY,
-    streaming=True,
-)
 
 initial_message = (
     "Olá . Eu sou o Neurochat, estou aqui para ser seu assistente de análise de dados. Confira abaixo as "
@@ -33,17 +27,23 @@ initial_message = (
 )
 
 with st.chat_message("assistant"):
-    st.markdown(initial_message)
+    st.write(initial_message)
     st.dataframe(SCHEMA_DF, hide_index=True)
 
 if prompt := st.chat_input("Escreva seu comando para o neurochat: "):
     with st.chat_message("user"):
-        st.markdown(prompt)
+        st.write(prompt)
 
     # VALIDATE INPUT
-    is_valid = False
+    query_validator = QueryValidator()
+    st.write("Validando input...🔍")
+    validate_status, reason = query_validator.validate_query(prompt)
+    is_valid = validate_status == "valid"
     with st.chat_message("assistant"):
         if is_valid:
-            st.markdown("Input valido")
+            st.write("Input valido✅")
         else:
-            st.warning("Input inválido. Por favor inicie um novo chat!")
+            st.warning(
+                f"Input inválido‼️\nSeu input foi considerado ivalid por: {reason}"
+                "Por favor, tente novamente!"
+            )
