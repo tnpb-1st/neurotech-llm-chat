@@ -130,6 +130,7 @@ class SQLExecutor:
         final_response = {"sql_query": sql_query, "data": query_result["data"]}
         return final_response
 
+
 if __name__ == "__main__":
     try:
         input_query = "Qual a média de idade por estado?"
