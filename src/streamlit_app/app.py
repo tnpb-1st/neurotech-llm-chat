@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
-from src.streamlit_app.templates import (
-    TABLE_INFO,
-)  # Certifique-se de que este caminho esteja correto
+# Certifique-se de que este caminho esteja correto
 from src.config.constants import (
     OPENAI_MODEL,
     OPENAI_API_KEY,
+    TABLE_INFO
 )  # Certifique-se de que este caminho esteja correto
 
 from langchain_openai import ChatOpenAI
@@ -13,7 +12,7 @@ from langchain_openai import ChatOpenAI
 # Cria um DataFrame com as informações da tabela
 SCHEMA_DF = pd.DataFrame(TABLE_INFO)
 
-st.title("Chatbot de Análise de Dados (SQL) e Visualização")
+st.title("Chatbot de Análise de Dados (SQL)")
 col1 = st.columns([0.2])[0]
 
 # with col1:
@@ -29,7 +28,8 @@ chat = ChatOpenAI(
 
 initial_message = (
     "Olá . Eu sou o Neurochat, estou aqui para ser seu assistente de análise de dados. Confira abaixo as "
-    "informações do Banco de Dados."
+    "informações do Banco de Dados. Você pode me fazer perguntas ou consultas sobre esses dados que eu ir"
+    "ei te ajudar a responder. Vamos lá!"
 )
 
 with st.chat_message("assistant"):
