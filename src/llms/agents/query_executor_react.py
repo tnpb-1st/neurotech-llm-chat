@@ -12,7 +12,7 @@ from langchain_core.agents import AgentAction, AgentFinish
 @tool
 def check_sql_syntax(sql: str) -> bool:
     """This tool checks if the SQL syntax is valid by running the query in a
-    DuckDB with a table like the real V1 table. It returns True if the syntax is
+    DuckDB with a table like the real table. It returns True if the syntax is
     valid, otherwise it returns False."""
     print("[check_sql_syntax] Verificando sintaxe:", sql)
     return True

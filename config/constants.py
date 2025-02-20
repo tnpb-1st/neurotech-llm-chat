@@ -71,3 +71,4 @@ int main() {
 """
 
 INSIGHT_FAIL_MSG = "Não foi possível gerar insights. Verifique os dados fornecidos."
+TABLE_NAME = "V1"

@@ -4,11 +4,7 @@ import pandas as pd
 from langchain_core.prompts.prompt import PromptTemplate
 from langchain.tools import tool
 from langchain_openai import ChatOpenAI
-from config.constants import (
-    OPENAI_MODEL,
-    OPENAI_API_KEY,
-    TABLE_INFO,
-)
+from config.constants import OPENAI_MODEL, OPENAI_API_KEY, TABLE_INFO, TABLE_NAME
 from src.llms.prompts.prompts import SQL_GENERATOR_TEMPLATE
 from src.llms.parsers.sql_output_parser import SQLQueryOutputParser
 from src.data_access.connector import DBConnector
@@ -23,18 +19,18 @@ from src.data_access.connector import DBConnector
 @tool
 def check_sql_syntax(sql: str) -> bool:
     """
-    Valida a sintaxe SQL usando DuckDB com uma estrutura de tabela similar à tabela real V1.
+    Valida a sintaxe SQL usando DuckDB com uma estrutura de tabela similar à tabela real .
     Args:
         sql: String da query SQL a ser validada
     Retorna:
         bool: True se a sintaxe for válida, False caso contrário
     """
     try:
-        # Create temporary table with same schema as V1
+        # Create temporary table with same schema as
         conn = duckdb.connect(":memory:")
         conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS v1 (
+            f"""
+            CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
                 REF_DATE TIMESTAMP,
                 TARGET INTEGER,
                 SEXO CHAR(1),
@@ -84,7 +80,7 @@ class SQLExecutor:
         self.llm = ChatOpenAI(temperature=0, model=OPENAI_MODEL, api_key=OPENAI_API_KEY)
         self.sql_prompt = PromptTemplate.from_template(
             template=SQL_GENERATOR_TEMPLATE
-        ).partial(db_schema=TABLE_INFO)
+        ).partial(db_schema=TABLE_INFO, table_name=TABLE_NAME)
         self.parser = SQLQueryOutputParser()
 
     def generate_sql_query(self, user_input: str) -> str:

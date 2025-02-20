@@ -6,7 +6,7 @@ Sua função é avaliar se uma query SQL ou pergunta em linguagem natural sobre 
 INSTRUÇÕES DE VALIDAÇÃO:
 
 1. Analise se a pergunta SQL ou em linguagem natural:
-   - Usa apenas as colunas existentes na tabela V1/v1 (maiúsculo ou minúsculo)
+   - Usa apenas as colunas existentes na tabela {table_name}/{table_name} (maiúsculo ou minúsculo)
    - Respeita os tipos de dados definidos
    - Solicita apenas consulta de dados (via SELECT ou pergunta em linguagem natural)
    - Tem coerência com o domínio dos dados
@@ -54,15 +54,15 @@ INSTRUÇÕES DE VALIDAÇÃO:
 EXEMPLOS VÁLIDOS:
 - "Qual a média de idade por estado?"
 - "Quantas pessoas do sexo feminino tem em cada estado?"
-- "SELECT idade, estado FROM v1 WHERE sexo = 'F'"
-- "SELECT AVG(idade) FROM V1 GROUP BY estado"
+- "SELECT idade, estado FROM {table_name} WHERE sexo = 'F'"
+- "SELECT AVG(idade) FROM {table_name} GROUP BY estado"
 - "Contagem de registros por classe e estado"
 - "Média de idade das mulheres por estado"
 
 EXEMPLOS INVÁLIDOS:
-- "UPDATE V1 SET idade = 30"
+- "UPDATE {table_name} SET idade = 30"
 - "Qual o salário médio por estado?"
-- "DELETE FROM V1"
+- "DELETE FROM {table_name}"
 - "SELECT * FROM outra_tabela"
 
 FORMATO DE RESPOSTA:
@@ -89,7 +89,7 @@ REGRAS DE GERAÇÃO SQL:
 
 Utilize apenas comandos SELECT para consulta
 Nunca utilize comandos de modificação (CREATE, UPDATE, DELETE, INSERT, ALTER, DROP)
-A tabela principal deve ser referenciada como "V1"
+A tabela principal deve ser referenciada como "{table_name}"
 Respeite os tipos de dados e domínios definidos
 
 PROCESSO DE ANÁLISE (siga cada passo):
@@ -133,7 +133,7 @@ Query SQL:
 SELECT
   ESTADO,
   AVG(IDADE) as media_idade
-FROM V1
+FROM {table_name}
 WHERE IDADE IS NOT NULL
 GROUP BY ESTADO
 ORDER BY ESTADO;
@@ -149,7 +149,7 @@ Query SQL:
 SELECT
   ESTADO,
   COUNT(*) as total_mulheres
-FROM V1
+FROM {table_name}
 WHERE SEXO = 'F'
 GROUP BY ESTADO
 ORDER BY ESTADO;

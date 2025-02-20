@@ -3,6 +3,7 @@ from langchain.prompts import ChatPromptTemplate
 from config.constants import TABLE_INFO, OPENAI_API_KEY, OPENAI_MODEL
 from ..prompts.prompts import QUERY_VALIDATOR_TEMPLATE
 from typing import Tuple
+from config.constants import TABLE_NAME
 
 # chamada
 # validator = QueryValidator()
@@ -36,10 +37,14 @@ class QueryValidator:
         """
         try:
             response = self.chain.invoke(
-                {"db_schema": TABLE_INFO, "user_input": user_input}
+                {
+                    "db_schema": TABLE_INFO,
+                    "user_input": user_input,
+                    "table_name": TABLE_NAME,
+                }
             )
             reason, status = response.content.split("|")
-            reason = reason.strip(" '\".")
+            reason = reason.strip(" '\".[]")
             status = status.strip().capitalize()
             return reason, status
         except Exception as e:
