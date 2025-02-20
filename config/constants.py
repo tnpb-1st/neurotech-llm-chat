@@ -72,3 +72,6 @@ int main() {
 
 INSIGHT_FAIL_MSG = "Não foi possível gerar insights. Verifique os dados fornecidos."
 TABLE_NAME = "V1"
+NEUROCHAT_IMG = (
+    "/home/tnpb/PycharmProjects/chatbot-neuro/data/local/neurotech_img_logo.png"
+)

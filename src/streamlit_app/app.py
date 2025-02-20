@@ -3,7 +3,7 @@ import pandas as pd
 from src.llms.agents.query_validator import QueryValidator
 from src.llms.agents.sql_executor import SQLExecutor
 from src.llms.agents.insight_generator import InsightsGenerator
-from config.constants import TABLE_INFO
+from config.constants import TABLE_INFO, NEUROCHAT_IMG
 
 
 class DataChatApp:
@@ -28,7 +28,7 @@ class DataChatApp:
             "ajudar a responder. Vamos lá!"
         )
 
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar=NEUROCHAT_IMG):
             st.write(initial_message)
             st.dataframe(self.schema_df, hide_index=True)
 
@@ -42,7 +42,7 @@ class DataChatApp:
             validate_status, reason = self.query_validator_agent.validate_query(prompt)
             is_valid = validate_status == "valid"
 
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar=NEUROCHAT_IMG):
                 if is_valid:
                     st.write("Input válido✅")
                     st.write("Processando Query SQL...🔄")
@@ -62,7 +62,9 @@ class DataChatApp:
                             insight_dir = query_result
                             insight_dir["input"] = prompt
                             st.write("Gerando insights...📊")
-                            insights = self.insights_generator_agent.generate_insights(insight_dir)
+                            insights = self.insights_generator_agent.generate_insights(
+                                insight_dir
+                            )
                             st.write(insights)
                         st.write("Fim da Análise!🎉")
                 else:
