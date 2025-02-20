@@ -64,6 +64,7 @@ class DataChatApp:
                             st.write("Gerando insights...📊")
                             insights = self.insights_generator_agent.generate_insights(insight_dir)
                             st.write(insights)
+                        st.write("Fim da Análise!🎉")
                 else:
                     st.warning(
                         f"Requisição inválida‼️\nSeu input foi considerado inválido por: {reason} "
